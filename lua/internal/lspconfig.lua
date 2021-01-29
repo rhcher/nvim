@@ -33,9 +33,9 @@ lspconfig.gopls.setup {
 
 lspconfig.sumneko_lua.setup {
   cmd = {
-    global.home.."/workstation/lua-language-server/bin/macOS/lua-language-server",
+    global.home.."/lua-language-server/bin/Linux/lua-language-server",
     "-E",
-    global.home.."/workstation/lua-language-server/main.lua"
+    global.home.."/lua-language-server/main.lua"
   };
   settings = {
     Lua = {
@@ -59,7 +59,7 @@ lspconfig.tsserver.setup {
 }
 
 local servers = {
-  'dockerls','bashls','zls'
+  'dockerls','bashls','zls','clangd'
 }
 
 for _,server in ipairs(servers) do

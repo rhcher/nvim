@@ -19,18 +19,18 @@ end
 function mapping:load_vim_define()
   self.vim= {
     -- Vim map
-    ["n|<C-x>k"]     = map_cr('Bdelete'):with_noremap():with_silent(),
-    ["n|<C-s>"]      = map_cu('write'):with_noremap(),
+    ["n|<leader>bk"]     = map_cr('Bdelete'):with_noremap():with_silent(),
+    ["n|<leader>bs"]      = map_cu('write'):with_noremap(),
     ["n|Y"]          = map_cmd('y$'),
     ["n|]w"]         = map_cu('WhitespaceNext'):with_noremap(),
     ["n|[w"]         = map_cu('WhitespacePrev'):with_noremap(),
     ["n|]b"]         = map_cu('bp'):with_noremap(),
     ["n|[b"]         = map_cu('bn'):with_noremap(),
     ["n|<Space>cw"]  = map_cu([[silent! keeppatterns %substitute/\s\+$//e]]):with_noremap():with_silent(),
-    ["n|<C-h>"]      = map_cmd('<C-w>h'):with_noremap(),
-    ["n|<C-l>"]      = map_cmd('<C-w>l'):with_noremap(),
-    ["n|<C-j>"]      = map_cmd('<C-w>j'):with_noremap(),
-    ["n|<C-k>"]      = map_cmd('<C-w>k'):with_noremap(),
+    ["n|<A-h>"]      = map_cmd('<C-w>h'):with_noremap(),
+    ["n|<A-l>"]      = map_cmd('<C-w>l'):with_noremap(),
+    ["n|<A-j>"]      = map_cmd('<C-w>j'):with_noremap(),
+    ["n|<A-k>"]      = map_cmd('<C-w>k'):with_noremap(),
     ["n|<C-w>["]     = map_cr('vertical resize -5'),
     ["n|<C-w>]"]     = map_cr('vertical resize +5'),
     ["n|<Leader>ss"] = map_cu('SessionSave'):with_noremap(),
@@ -48,10 +48,12 @@ function mapping:load_vim_define()
     ["i|<C-s>"]      = map_cmd('<Esc>:w<CR>'),
     ["i|<C-q>"]      = map_cmd('<Esc>:wq<CR>'),
     ["i|<C-e>"]      = map_cmd([[pumvisible() ? "\<C-e>" : "\<End>"]]):with_noremap():with_expr(),
+    ["i|jj"]         = map_cmd('<Esc>'):with_noremap(),
     -- TODO Wrap line
-    ["i|<TAB>"]      = map_cmd([[pumvisible() ? "\<C-n>" : vsnip#available(1) ?"\<Plug>(vsnip-expand-or-jump)" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()]]):with_expr():with_silent(),
+    ["i|<TAB>"]      = map_cmd([[pumvisible() ? "\<C-y>" : vsnip#available(1) ?"\<Plug>(vsnip-expand-or-jump)" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()]]):with_expr():with_silent(),
+    ["i|<C-l>"]      = map_cmd('<Plug>(vsnip-expand-or-jump)');
     ["i|<S-TAB>"]    = map_cmd([[pumvisible() ? "\<C-p>" : "\<C-h>"]]):with_noremap():with_expr(),
-    ["i|<CR>"]       = map_cmd('compe#confirm("<Plug>delimitMateCR")'):with_noremap():with_expr(),
+--     ["i|<CR>"]       = map_cmd('compe#confirm("<Plug>delimitMateCR")'):with_noremap():with_expr(),
   -- command line
     ["c|<C-b>"]      = map_cmd('<Left>'):with_noremap(),
     ["c|<C-f>"]      = map_cmd('<Right>'):with_noremap(),
@@ -71,15 +73,15 @@ function mapping:load_plugin_define()
     ["n|]e"]             = map_cmd("<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>"):with_noremap():with_silent(),
     ["n|K"]              = map_cmd("<cmd>lua vim.lsp.buf.hover()<CR>"):with_noremap():with_silent(),
     ["n|ga"]             = map_cmd("<cmd>lua require('lspsaga.codeaction').code_action()<CR>"):with_noremap():with_silent(),
-    ["n|gd"]             = map_cmd("<cmd>lua require'lspsaga.provider'.preview_definiton()<CR>"):with_noremap():with_silent(),
-    ["n|gD"]             = map_cmd("<cmd>lua vim.lsp.buf.implementation()<CR>"):with_noremap():with_silent(),
+    ["n|gd"]             = map_cmd("<cmd>lua vim.lsp.buf.definition()<CR>"):with_noremap():with_silent(),
+    ["n|gy"]             = map_cmd("<cmd>lua vim.lsp.buf.implementation()<CR>"):with_noremap():with_silent(),
     ["n|gs"]             = map_cmd("<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>"):with_noremap():with_silent(),
-    ["n|gr"]             = map_cmd("<cmd>lua require('lspsaga.rename').rename()<CR>"):with_noremap():with_silent(),
-    ["n|gh"]             = map_cmd("<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>"):with_noremap():with_silent(),
+    ["n|<leader>lr"]     = map_cmd("<cmd>lua require('lspsaga.rename').rename()<CR>"):with_noremap():with_silent(),
+    ["n|gr"]             = map_cmd("<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>"):with_noremap():with_silent(),
     ["n|gt"]             = map_cmd("<cmd>lua vim.lsp.buf.type_definition()<CR>"):with_noremap():with_silent(),
     ["n|<Leader>cw"]     = map_cmd("<cmd>lua vim.lsp.buf.workspace_symbol()<CR>"):with_noremap():with_silent(),
-    ["n|<Leader>ce"]     = map_cmd("<cmd>lua require'lspsaga.diagnostic'.show_buf_diagnostics()<CR>"):with_noremap():with_silent(),
-    ["n|<Leader>ct"]      = map_args("Template"),
+    ["n|<Leader>cx"]     = map_cmd("<cmd>lua require'lspsaga.diagnostic'.show_buf_diagnostics()<CR>"):with_noremap():with_silent(),
+    ["n|<Leader>ct"]     = map_args("Template"),
     -- dein
     ["n|<Leader>tr"]     = map_cr("call dein#recache_runtimepath()"):with_noremap():with_silent(),
     ["n|<Leader>tf"]     = map_cu('DashboardNewFile'):with_noremap():with_silent(),
@@ -87,7 +89,7 @@ function mapping:load_plugin_define()
     ["n|[g"]             = map_cmd("<plug>(signify-next-hunk)"),
     ["n|]g"]             = map_cmd("<plug>(signify-prev-hunk)"),
     -- Plugin nvim-tree
-    ["n|<Leader>e"]      = map_cr('NvimTreeToggle'):with_noremap():with_silent(),
+    ["n|-"]              = map_cr('NvimTreeToggle'):with_noremap():with_silent(),
     ["n|<Leader>F"]      = map_cr('NvimTreeFindFile'):with_noremap():with_silent(),
     -- Plugin MarkdownPreview
     ["n|<Leader>om"]     = map_cu('MarkdownPreview'):with_noremap():with_silent(),
@@ -117,8 +119,6 @@ function mapping:load_plugin_define()
     ["x|gcc"]            = map_cr('ProComment'),
     ["n|gcj"]            = map_cu('ProDoc'):with_silent():with_silent(),
     -- Plugin acceleratedjk
-    ["n|j"]              = map_cmd('<Plug>(accelerated_jk_gj)'):with_silent(),
-    ["n|k"]              = map_cmd('<Plug>(accelerated_jk_gk)'):with_silent(),
     -- Plugin QuickRun
     ["n|<Leader>r"]     = map_cr("<cmd> lua require'internal.selfunc'.run_command()"):with_noremap():with_silent(),
     -- Plugin Vista

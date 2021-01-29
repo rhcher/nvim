@@ -42,6 +42,7 @@
       \ 'markdown': 'toc',
       \ 'typescript': 'nvim_lsp',
       \ 'typescriptreact': 'nvim_lsp',
+      \ 'cpp': 'nvim_lsp'
       \ }
 
 - repo: ludovicchabant/vim-gutentags

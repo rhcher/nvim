@@ -19,7 +19,6 @@
 - repo: glepnir/dashboard-nvim
   hook_source: |
     let g:dashboard_preview_command = 'cat'
-    let g:dashboard_preview_pipeline = 'lolcat'
     let g:dashboard_preview_file = getenv('HOME') . '/.config/nvim/static/pokemon.txt'
     let g:dashboard_preview_file_height = 14
     let g:dashboard_preview_file_width = 80
@@ -53,9 +52,10 @@
     let g:nvim_tree_hide_dotfiles = 1
     let g:nvim_tree_indent_markers = 1
     let g:nvim_tree_bindings = {
-      \ 'edit':            ['<CR>', 'l'],
+      \ 'edit':            ['<CR>', 'o'],
       \ 'edit_vsplit':     's',
       \ 'edit_split':      'i',
+      \ 'dir_up':          'h',
       \}
     let g:nvim_tree_icons = {
       \ 'default': '',
