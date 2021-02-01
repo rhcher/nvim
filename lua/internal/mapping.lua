@@ -96,8 +96,8 @@ function mapping:load_plugin_define()
     -- Plugin DadbodUI
     ["n|<Leader>od"]     = map_cr('DBUIToggle'):with_noremap():with_silent(),
     -- Plugin Floaterm
-    ["n|<A-d>"]          = map_cu("lua require('lspsaga.floaterm').open_float_terminal()"):with_noremap():with_silent(),
-    ["t|<A-d>"]          = map_cu([[<C-\><C-n>:lua require('lspsaga.floaterm').close_float_terminal()<CR>]]):with_noremap():with_silent(),
+    ["n|<A-=>"]          = map_cu("lua require('lspsaga.floaterm').open_float_terminal()"):with_noremap():with_silent(),
+    ["t|<A-=>"]          = map_cu([[<C-\><C-n>:lua require('lspsaga.floaterm').close_float_terminal()<CR>]]):with_noremap():with_silent(),
     ["n|<Leader>g"]      = map_cu("lua require('lspsaga.floaterm').open_float_terminal('lazygit')"):with_noremap():with_silent(),
     -- Far.vim
     ["n|<Leader>fz"]     = map_cr('Farf'):with_noremap():with_silent();
