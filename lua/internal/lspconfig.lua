@@ -59,7 +59,7 @@ lspconfig.tsserver.setup {
 }
 
 local servers = {
-  'dockerls','bashls','zls','clangd'
+  'dockerls','bashls','zls','clangd', 'rust-analyzer'
 }
 
 for _,server in ipairs(servers) do
